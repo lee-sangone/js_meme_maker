@@ -4,14 +4,25 @@ const ctx = canvas.getContext("2d")
 canvas.width = 750
 canvas.height = 750
 
-ctx.fillRect(210,200,15,100)
-ctx.fillRect(350,200,15,100)
-ctx.fillRect(260,200,65,200)
+ctx.lineWidth = 2
 
-ctx.arc(290,100,50,0,2 * Math.PI)
-ctx.fill()
-ctx.beginPath()
-ctx.fillStyle = "blue"
-ctx.arc(270,100,8,Math.PI,2*Math.PI)
-ctx.arc(310,100,8,Math.PI,2*Math.PI)
-ctx.fill()
+const colors = [
+    "#ffb8b8",
+    "#c56cf0",
+    "#ff9f1a",
+    "#fff200",
+    "#32ff7e",
+    "#2ecc71"
+]
+
+function onClick (e) {
+    ctx.beginPath()
+    ctx.moveTo(0,0)
+    const color = colors[Math.floor(Math.random() * colors.length)]
+    ctx.strokeStyle = color
+    ctx.lineTo(e.offsetX, e.offsetY)
+    ctx.stroke()
+}
+
+
+canvas.addEventListener("mousemove" , onClick)
