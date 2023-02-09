@@ -5,24 +5,26 @@ canvas.width = 750
 canvas.height = 750
 
 ctx.lineWidth = 2
+let isPainting = false
+function onMove (e) {
+    if (isPainting) {
+        ctx.lineTo(e.offsetX, e.offsetY)
+        ctx.stroke()
+        return
+    }
+    ctx.moveTo(e.offsetX, e.offsetY)
 
-const colors = [
-    "#ffb8b8",
-    "#c56cf0",
-    "#ff9f1a",
-    "#fff200",
-    "#32ff7e",
-    "#2ecc71"
-]
-
-function onClick (e) {
-    ctx.beginPath()
-    ctx.moveTo(0,0)
-    const color = colors[Math.floor(Math.random() * colors.length)]
-    ctx.strokeStyle = color
-    ctx.lineTo(e.offsetX, e.offsetY)
-    ctx.stroke()
 }
 
+function onMousedown () {
+    isPainting = true
+}
 
-canvas.addEventListener("mousemove" , onClick)
+function canclePainting () {
+    isPainting = false
+}
+
+canvas.addEventListener("mousemove", onMove)
+canvas.addEventListener("mousedown", onMousedown)
+document.addEventListener("mouseup", canclePainting)
+//canvas.addEventListener("mouseleave", onMouseup)
