@@ -6,6 +6,7 @@ const color = document.getElementById('color')
 const lineWidth = document.querySelector("#line-width")
 const canvas = document.querySelector("canvas")
 const ctx = canvas.getContext("2d")
+const fileInput = document.getElementById("file")
 
 canvas.width = 750
 canvas.height = 750
@@ -73,6 +74,20 @@ function onErase () {
     isFilling = false
     modeBtn.innerText = "Fill"
 }
+
+function onFileChange (e) {
+    const file = e.target.files[0]
+    const url = URL.createObjectURL(file)
+    const image = new Image()
+    image.src = url
+    image.onload = function () {
+        ctx.drawImage(image, 0,0, 750, 750)
+        fileInput.value = null
+    }
+}
+
+
+
 canvas.addEventListener("mousemove", onMove)
 canvas.addEventListener("mousedown", onMousedown)
 document.addEventListener("mouseup", canclePainting)
@@ -86,3 +101,4 @@ colorOption.forEach (color => color.addEventListener("click", colorClick))
 modeBtn.addEventListener("click", onModeClick)
 destroyBtn.addEventListener("click", Destroy)
 eraseBtn.addEventListener("click", onErase)
+fileInput.addEventListener("change", onFileChange)
