@@ -1,3 +1,5 @@
+const saveBtn = document.getElementById('save')
+const textInput = document.getElementById("text")
 const modeBtn = document.getElementById('mode-btn')
 const destroyBtn = document.getElementById('destroy-btn')
 const eraseBtn = document.getElementById('erase-btn')
@@ -12,6 +14,7 @@ canvas.width = 750
 canvas.height = 750
 
 ctx.lineWidth = lineWidth.value
+ctx.lineCap = "round s"
 let isPainting = false
 let isFilling = false
 function onMove (e) {
@@ -86,8 +89,26 @@ function onFileChange (e) {
     }
 }
 
+function ondoubleclick (e) {
+    const text = textInput.value
+    if(text !== "") {
+    ctx.save()
+    ctx.lineWidth = 1
+    ctx.font = "49px serif"
+    ctx.fillText(text, e.offsetX, e.offsetY)
+    ctx.restore()
+    }
+}
 
+function onSaveClick () {
+    const url = canvas.toDataURL()
+    const a = document.createElement("a")
+    a.href = url
+    a.download = "myDrawing.png"
+    a.click()    
+}
 
+canvas.addEventListener("dblclick", ondoubleclick)
 canvas.addEventListener("mousemove", onMove)
 canvas.addEventListener("mousedown", onMousedown)
 document.addEventListener("mouseup", canclePainting)
@@ -102,3 +123,4 @@ modeBtn.addEventListener("click", onModeClick)
 destroyBtn.addEventListener("click", Destroy)
 eraseBtn.addEventListener("click", onErase)
 fileInput.addEventListener("change", onFileChange)
+saveBtn.addEventListener("click", onSaveClick)
