@@ -8,10 +8,9 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <canvas></canvas>
-    <input id="line-width" type="range" min="1" max="10" value="5" step="0.5"/>
-    <input type="color" id="color" />
-    <div>
+    
+    <div class="color-options">
+        <input type="color" id="color" />
         <div class= "color-option" style="background-color: #1abc9c; " 
     data-color="#1abc9c"></div>
     <div class= "color-option" style="background-color: #3498db; " 
@@ -30,19 +29,23 @@
     data-color="#95a5a6"></div>
     <div class= "color-option" style="background-color: #d35400; " 
     data-color="#d35400"></div>
-    <div class= "color-option" style="background-color: #bdc3c7; " 
-    data-color="#bdc3c7"></div>
     <div class= "color-option" style="background-color: #2ecc71; " 
     data-color="#2ecc71"></div>
     <div class= "color-option" style="background-color: #e67e22; " 
     data-color="#e67e22"></div>
     </div>
-    <button id="mode-btn">Fill</button>
-    <button id="destroy-btn">Destroy</button>
-    <button id="erase-btn">Erase</button>
-    <input type="file" accept="image/*" id="file" />
-    <input type="text" placeholder="Write and double click" id="text" />
-    <button id="save">Save image</button>
+    <canvas></canvas>
+    <span >Pencil Width<div class="btns"><input id="line-width" type="range" min="1" max="10" value="5" step="0.5"/></span>
+        
+        <button id="mode-btn">🌈 Fill</button>
+        <button id="destroy-btn">💣 Destroy</button>
+        <button id="erase-btn">❌ Erase</button>
+        <label for="file">
+            🌆 Add photo
+            <input type="file" accept="image/*" id="file" /></label>
+        <input type="text" placeholder="Add text here...:)" id="text" />
+        <button id="save">💾 Save image</button>
+    </div>
     <script src="app.js"></script>
 </body>
 </html>
